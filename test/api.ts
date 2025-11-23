@@ -1132,4 +1132,208 @@ suite('api', function () {
             assert.equal(maxApprovalLimit, 100) // Default fallback value
         })
     })
+
+    suite('search_proposals', function () {
+        test('search by single character query', async function () {
+            const res = await msigs.search_proposals('upg')
+            assert.isDefined(res)
+            assert.equal(res.query, 'upg')
+            assert.isArray(res.proposals)
+            assert.isDefined(res.total)
+            assert.isDefined(res.more)
+
+            // All results should contain 'upg' in proposal_name
+            res.proposals.forEach((p) => {
+                const name = String(p.proposal_name).toLowerCase()
+                assert.include(name, 'upg', 'Proposal name should contain query string')
+            })
+        })
+
+        test('search by multi-character query', async function () {
+            const res = await msigs.search_proposals('trans')
+            assert.isDefined(res)
+            assert.equal(res.query, 'trans')
+            assert.isArray(res.proposals)
+
+            // All results should contain 'trans' in proposal_name
+            res.proposals.forEach((p) => {
+                const name = String(p.proposal_name).toLowerCase()
+                assert.include(name, 'trans', 'Proposal name should contain query string')
+            })
+        })
+
+        test('search with case insensitivity', async function () {
+            const res = await msigs.search_proposals('UPGRADE')
+            assert.isDefined(res)
+            assert.equal(res.query, 'UPGRADE')
+            assert.isArray(res.proposals)
+
+            // Should find proposals with 'upgrade' in name
+            const hasUpgrade = res.proposals.some((p) =>
+                String(p.proposal_name).toLowerCase().includes('upgrade')
+            )
+            assert.isTrue(hasUpgrade, 'Should find proposals with upgrade in name')
+        })
+
+        test('search with status filter', async function () {
+            const res = await msigs.search_proposals('upg', {
+                status: 'proposed',
+            })
+            assert.isDefined(res)
+            assert.equal(res.query, 'upg')
+            assert.equal(res.status, 'proposed')
+            assert.isArray(res.proposals)
+
+            // All results should be proposed status
+            res.proposals.forEach((p) => {
+                assert.equal(p.status, 'proposed')
+            })
+        })
+
+        test('search with status=executed filter', async function () {
+            const res = await msigs.search_proposals('upgrade', {
+                status: 'executed',
+            })
+            assert.isDefined(res)
+            assert.equal(res.query, 'upgrade')
+            assert.equal(res.status, 'executed')
+            assert.isArray(res.proposals)
+
+            // All results should be executed status
+            res.proposals.forEach((p) => {
+                assert.equal(p.status, 'executed')
+                const name = String(p.proposal_name).toLowerCase()
+                assert.include(name, 'upgrade')
+            })
+        })
+
+        test('search with limit parameter', async function () {
+            const res = await msigs.search_proposals('tra', {
+                limit: 5,
+            })
+            assert.isDefined(res)
+            assert.isArray(res.proposals)
+            assert.isAtMost(res.proposals.length, 5)
+
+            if (res.total > 5) {
+                assert.isTrue(res.more)
+            }
+        })
+
+        test('search with offset parameter', async function () {
+            const res = await msigs.search_proposals('tra', {
+                limit: 5,
+                offset: 2,
+            })
+            assert.isDefined(res)
+            assert.isArray(res.proposals)
+            assert.isDefined(res.total)
+
+            // Verify all results match query
+            res.proposals.forEach((p) => {
+                const name = String(p.proposal_name).toLowerCase()
+                assert.include(name, 'tra')
+            })
+        })
+
+        test('search with no results returns empty array', async function () {
+            const res = await msigs.search_proposals('xyznonexistent999')
+            assert.isDefined(res)
+            assert.equal(res.query, 'xyznonexistent999')
+            assert.isArray(res.proposals)
+            assert.equal(res.proposals.length, 0)
+            assert.equal(res.total, 0)
+            assert.isFalse(res.more)
+        })
+
+        test('search exact proposal name', async function () {
+            const res = await msigs.search_proposals('upgrade')
+            assert.isDefined(res)
+            assert.isArray(res.proposals)
+
+            // Should find alice/upgrade
+            const hasAliceUpgrade = res.proposals.some(
+                (p) => String(p.proposer) === 'alice' && String(p.proposal_name) === 'upgrade'
+            )
+            assert.isTrue(hasAliceUpgrade, 'Should find alice/upgrade proposal')
+        })
+
+        test('search substring matching', async function () {
+            const res = await msigs.search_proposals('grad')
+            assert.isDefined(res)
+            assert.isArray(res.proposals)
+
+            // Should find proposals with 'grad' in name (like 'upgrade')
+            res.proposals.forEach((p) => {
+                const name = String(p.proposal_name).toLowerCase()
+                assert.include(name, 'grad')
+            })
+        })
+
+        test('search pagination with multiple pages', async function () {
+            // Test pagination parameters work correctly
+            // Note: Test data has limited indexed proposals, so we verify pagination structure
+            const page1 = await msigs.search_proposals('upgrade', {
+                limit: 1,
+            })
+            assert.isDefined(page1)
+            assert.isArray(page1.proposals)
+            assert.isAtMost(page1.proposals.length, 1)
+
+            // Verify pagination info is present and correct
+            assert.isDefined(page1.total)
+            assert.isDefined(page1.more)
+            assert.equal(page1.proposals.length, Math.min(1, page1.total))
+        })
+
+        test('search respects limit validation', async function () {
+            try {
+                await msigs.search_proposals('upg', {limit: 50})
+                assert.fail('Should have thrown error')
+            } catch (error: any) {
+                assert.include(error.message, 'Limit cannot exceed 20')
+            }
+        })
+
+        test('search results include all proposal fields', async function () {
+            const res = await msigs.search_proposals('upgrade', {
+                limit: 1,
+            })
+            assert.isDefined(res)
+
+            if (res.proposals.length > 0) {
+                const p = res.proposals[0]
+                assert.isDefined(p.proposer)
+                assert.isDefined(p.proposal_name)
+                assert.isDefined(p.status)
+                assert.isDefined(p.created_at)
+                assert.isDefined(p.created_block)
+                assert.isDefined(p.created_trx_id)
+                assert.isDefined(p.globalseq)
+                assert.isDefined(p.expiration)
+                assert.isDefined(p.actions_count)
+                assert.isDefined(p.requested_approvals)
+                assert.isDefined(p.provided_approvals)
+            }
+        })
+
+        test('search with combined filters (status + limit)', async function () {
+            const res = await msigs.search_proposals('tra', {
+                status: 'proposed',
+                limit: 10,
+            })
+            assert.isDefined(res)
+            assert.equal(res.query, 'tra')
+            assert.equal(res.status, 'proposed')
+            assert.isArray(res.proposals)
+            assert.isAtMost(res.proposals.length, 10)
+
+            // All results should match both filters
+            res.proposals.forEach((p) => {
+                assert.equal(p.status, 'proposed')
+                const name = String(p.proposal_name).toLowerCase()
+                assert.include(name, 'tra')
+            })
+        })
+    })
 })

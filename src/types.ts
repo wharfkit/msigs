@@ -124,4 +124,12 @@ export interface GetApproverProposalsResponse {
     total: number
 }
 
+export interface SearchProposalsResponse {
+    query: string
+    status?: string
+    proposals: Proposal[]
+    more: boolean
+    total: number
+}
+
 export type GetStatusResponse = ServiceStatus

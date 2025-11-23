@@ -8,6 +8,7 @@ import type {
     GetProposalResponse,
     GetProposalsResponse,
     GetStatusResponse,
+    SearchProposalsResponse,
 } from './types'
 
 interface GetProposalOptions {
@@ -43,6 +44,12 @@ interface GetActivityOptions {
 interface GetApproverProposalsOptions {
     status?: string
     include_approved?: boolean
+    limit?: number
+    offset?: number
+}
+
+interface SearchProposalsOptions {
+    status?: string
     limit?: number
     offset?: number
 }
@@ -274,6 +281,33 @@ export class MsigsClient {
             path: '/v1/proposals/get_approver_proposals',
             params,
         }) as Promise<GetApproverProposalsResponse>
+    }
+
+    async search_proposals(query: string, options?: SearchProposalsOptions) {
+        const params: Record<string, any> = {
+            query,
+        }
+
+        if (options && options.status !== undefined) {
+            params['status'] = options.status
+        }
+
+        if (options && options.limit !== undefined) {
+            await this.initializeLimits()
+            if (options.limit > this.maxProposalLimit!) {
+                throw new Error(`Limit cannot exceed ${this.maxProposalLimit}`)
+            }
+            params['limit'] = Int32.from(options.limit)
+        }
+
+        if (options && options.offset !== undefined) {
+            params['offset'] = Int32.from(options.offset)
+        }
+
+        return this.client.call({
+            path: '/v1/proposals/search_proposals',
+            params,
+        }) as Promise<SearchProposalsResponse>
     }
 
     async get_status() {

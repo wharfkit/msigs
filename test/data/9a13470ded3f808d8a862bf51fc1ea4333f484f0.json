@@ -1,0 +1,31 @@
+{
+    "request": {
+        "path": "http://localhost/v1/proposals/get_activity",
+        "params": {
+            "method": "POST",
+            "body": "{\"account\":\"alice\",\"limit\":20,\"action_type\":\"executed\"}",
+            "headers": {}
+        }
+    },
+    "status": 200,
+    "json": {
+        "account": "alice",
+        "activity": [
+            {
+                "action": "executed",
+                "proposal_name": "upgrade",
+                "proposer": "alice",
+                "timestamp": "2027-12-12T12:39:01.500"
+            },
+            {
+                "action": "executed",
+                "proposal_name": "upgrade",
+                "proposer": "alice",
+                "timestamp": "2027-12-12T12:16:31.500"
+            }
+        ],
+        "more": false,
+        "total": 2
+    },
+    "text": "{\"account\":\"alice\",\"activity\":[{\"action\":\"executed\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:39:01.500\"},{\"action\":\"executed\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:16:31.500\"}],\"more\":false,\"total\":2}"
+}

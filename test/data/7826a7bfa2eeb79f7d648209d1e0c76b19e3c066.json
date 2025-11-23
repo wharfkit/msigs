@@ -1,0 +1,44 @@
+{
+    "request": {
+        "path": "http://localhost/v1/proposals/get_approvals",
+        "params": {
+            "method": "POST",
+            "body": "{\"proposer\":\"yolanda\",\"proposal_name\":\"flipflop\"}",
+            "headers": {}
+        }
+    },
+    "status": 200,
+    "json": {
+        "more": false,
+        "proposal_name": "flipflop",
+        "proposer": "yolanda",
+        "timeline": [
+            {
+                "action": "approve",
+                "actor": "approver",
+                "block_num": 400011,
+                "globalseq": 4002,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:19:26.500"
+            },
+            {
+                "action": "unapprove",
+                "actor": "approver",
+                "block_num": 400021,
+                "globalseq": 4003,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:20:16.500"
+            },
+            {
+                "action": "approve",
+                "actor": "approver",
+                "block_num": 400031,
+                "globalseq": 4004,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:21:06.500"
+            }
+        ],
+        "total": 3
+    },
+    "text": "{\"more\":false,\"proposal_name\":\"flipflop\",\"proposer\":\"yolanda\",\"timeline\":[{\"action\":\"approve\",\"actor\":\"approver\",\"block_num\":400011,\"globalseq\":4002,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:19:26.500\"},{\"action\":\"unapprove\",\"actor\":\"approver\",\"block_num\":400021,\"globalseq\":4003,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:20:16.500\"},{\"action\":\"approve\",\"actor\":\"approver\",\"block_num\":400031,\"globalseq\":4004,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:21:06.500\"}],\"total\":3}"
+}

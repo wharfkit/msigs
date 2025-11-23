@@ -1,0 +1,52 @@
+{
+    "request": {
+        "path": "http://localhost/v1/proposals/get_approvals",
+        "params": {
+            "method": "POST",
+            "body": "{\"proposer\":\"dave\",\"proposal_name\":\"transfer\"}",
+            "headers": {}
+        }
+    },
+    "status": 200,
+    "json": {
+        "more": false,
+        "proposal_name": "transfer",
+        "proposer": "dave",
+        "timeline": [
+            {
+                "action": "approve",
+                "actor": "eve",
+                "block_num": 100045,
+                "globalseq": 1002,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:17:46.500"
+            },
+            {
+                "action": "approve",
+                "actor": "eve",
+                "block_num": 100372,
+                "globalseq": 1015,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:45:01.500"
+            },
+            {
+                "action": "approve",
+                "actor": "eve",
+                "block_num": 100395,
+                "globalseq": 1020,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:46:56.500"
+            },
+            {
+                "action": "approve",
+                "actor": "eve",
+                "block_num": 100422,
+                "globalseq": 1026,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:49:11.500"
+            }
+        ],
+        "total": 4
+    },
+    "text": "{\"more\":false,\"proposal_name\":\"transfer\",\"proposer\":\"dave\",\"timeline\":[{\"action\":\"approve\",\"actor\":\"eve\",\"block_num\":100045,\"globalseq\":1002,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:17:46.500\"},{\"action\":\"approve\",\"actor\":\"eve\",\"block_num\":100372,\"globalseq\":1015,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:45:01.500\"},{\"action\":\"approve\",\"actor\":\"eve\",\"block_num\":100395,\"globalseq\":1020,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:46:56.500\"},{\"action\":\"approve\",\"actor\":\"eve\",\"block_num\":100422,\"globalseq\":1026,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:49:11.500\"}],\"total\":4}"
+}

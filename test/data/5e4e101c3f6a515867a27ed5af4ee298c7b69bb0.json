@@ -1,0 +1,55 @@
+{
+    "request": {
+        "path": "http://localhost/v1/proposals/get_activity",
+        "params": {
+            "method": "POST",
+            "body": "{\"account\":\"bob\",\"limit\":20,\"action_type\":\"approved\"}",
+            "headers": {}
+        }
+    },
+    "status": 200,
+    "json": {
+        "account": "bob",
+        "activity": [
+            {
+                "action": "approved",
+                "proposal_name": "upgrade",
+                "proposer": "alice",
+                "timestamp": "2027-12-12T12:41:41.500"
+            },
+            {
+                "action": "approved",
+                "proposal_name": "upgrade",
+                "proposer": "alice",
+                "timestamp": "2027-12-12T12:40:16.500"
+            },
+            {
+                "action": "approved",
+                "proposal_name": "upgrade",
+                "proposer": "alice",
+                "timestamp": "2027-12-12T12:36:56.500"
+            },
+            {
+                "action": "approved",
+                "proposal_name": "upgrade",
+                "proposer": "alice",
+                "timestamp": "2027-12-12T12:34:26.500"
+            },
+            {
+                "action": "approved",
+                "proposal_name": "newperm",
+                "proposer": "alice",
+                "timestamp": "2027-12-12T12:20:01.500"
+            },
+            {
+                "action": "approved",
+                "proposal_name": "upgrade",
+                "proposer": "alice",
+                "timestamp": "2027-12-12T12:14:51.500"
+            }
+        ],
+        "more": false,
+        "total": 6
+    },
+    "text": "{\"account\":\"bob\",\"activity\":[{\"action\":\"approved\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:41:41.500\"},{\"action\":\"approved\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:40:16.500\"},{\"action\":\"approved\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:36:56.500\"},{\"action\":\"approved\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:34:26.500\"},{\"action\":\"approved\",\"proposal_name\":\"newperm\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:20:01.500\"},{\"action\":\"approved\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:14:51.500\"}],\"more\":false,\"total\":6}"
+}

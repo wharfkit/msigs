@@ -1,0 +1,84 @@
+{
+    "request": {
+        "path": "http://localhost/v1/proposals/get_approvals",
+        "params": {
+            "method": "POST",
+            "body": "{\"proposer\":\"alice\",\"proposal_name\":\"upgrade\"}",
+            "headers": {}
+        }
+    },
+    "status": 200,
+    "json": {
+        "more": false,
+        "proposal_name": "upgrade",
+        "proposer": "alice",
+        "timeline": [
+            {
+                "action": "approve",
+                "actor": "bob",
+                "block_num": 100010,
+                "globalseq": 1001,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:14:51.500"
+            },
+            {
+                "action": "approve",
+                "actor": "charlie",
+                "block_num": 100015,
+                "globalseq": 1001,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:15:16.500"
+            },
+            {
+                "action": "approve",
+                "actor": "bob",
+                "block_num": 100245,
+                "globalseq": 1013,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:34:26.500"
+            },
+            {
+                "action": "approve",
+                "actor": "bob",
+                "block_num": 100275,
+                "globalseq": 1019,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:36:56.500"
+            },
+            {
+                "action": "approve",
+                "actor": "charlie",
+                "block_num": 100280,
+                "globalseq": 1019,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:37:21.500"
+            },
+            {
+                "action": "approve",
+                "actor": "bob",
+                "block_num": 100315,
+                "globalseq": 1025,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:40:16.500"
+            },
+            {
+                "action": "approve",
+                "actor": "bob",
+                "block_num": 100332,
+                "globalseq": 1029,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:41:41.500"
+            },
+            {
+                "action": "approve",
+                "actor": "charlie",
+                "block_num": 100334,
+                "globalseq": 1029,
+                "permission": "active",
+                "timestamp": "2027-12-12T12:41:51.500"
+            }
+        ],
+        "total": 8
+    },
+    "text": "{\"more\":false,\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timeline\":[{\"action\":\"approve\",\"actor\":\"bob\",\"block_num\":100010,\"globalseq\":1001,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:14:51.500\"},{\"action\":\"approve\",\"actor\":\"charlie\",\"block_num\":100015,\"globalseq\":1001,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:15:16.500\"},{\"action\":\"approve\",\"actor\":\"bob\",\"block_num\":100245,\"globalseq\":1013,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:34:26.500\"},{\"action\":\"approve\",\"actor\":\"bob\",\"block_num\":100275,\"globalseq\":1019,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:36:56.500\"},{\"action\":\"approve\",\"actor\":\"charlie\",\"block_num\":100280,\"globalseq\":1019,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:37:21.500\"},{\"action\":\"approve\",\"actor\":\"bob\",\"block_num\":100315,\"globalseq\":1025,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:40:16.500\"},{\"action\":\"approve\",\"actor\":\"bob\",\"block_num\":100332,\"globalseq\":1029,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:41:41.500\"},{\"action\":\"approve\",\"actor\":\"charlie\",\"block_num\":100334,\"globalseq\":1029,\"permission\":\"active\",\"timestamp\":\"2027-12-12T12:41:51.500\"}],\"total\":8}"
+}

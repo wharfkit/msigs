@@ -35,6 +35,12 @@ interface GetActiveOptions {
     sort_by?: string
 }
 
+interface GetApprovalsOptions {
+    globalseq?: UInt64Type
+    limit?: number
+    offset?: number
+}
+
 interface GetActivityOptions {
     limit?: number
     offset?: number
@@ -215,13 +221,31 @@ export class MsigsClient {
         }) as Promise<GetActiveResponse>
     }
 
-    async get_approvals(proposer: NameType, proposalName: NameType) {
+    async get_approvals(proposer: NameType, proposalName: NameType, options?: GetApprovalsOptions) {
+        const params: Record<string, any> = {
+            proposer: Name.from(proposer),
+            proposal_name: Name.from(proposalName),
+        }
+
+        if (options && options.globalseq !== undefined) {
+            params['globalseq'] = UInt64.from(options.globalseq)
+        }
+
+        if (options && options.limit !== undefined) {
+            await this.initializeLimits()
+            if (options.limit > this.maxApprovalLimit!) {
+                throw new Error(`Limit cannot exceed ${this.maxApprovalLimit}`)
+            }
+            params['limit'] = Int32.from(options.limit)
+        }
+
+        if (options && options.offset !== undefined) {
+            params['offset'] = Int32.from(options.offset)
+        }
+
         return this.client.call({
             path: '/v1/proposals/get_approvals',
-            params: {
-                proposer: Name.from(proposer),
-                proposal_name: Name.from(proposalName),
-            },
+            params,
         }) as Promise<GetApprovalsResponse>
     }
 

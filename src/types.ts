@@ -107,7 +107,10 @@ export interface GetActiveResponse {
 export interface GetApprovalsResponse {
     proposer: Name | string
     proposal_name: Name | string
+    globalseq: number
     timeline: ApprovalEvent[]
+    total: number
+    more: boolean
 }
 
 export interface GetActivityResponse {

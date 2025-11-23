@@ -11,6 +11,12 @@ test: lib node_modules
 	@TS_NODE_PROJECT='./test/tsconfig.json' MOCK_DIR='./test/data' \
 		${BIN}/mocha ${MOCHA_OPTS} test/*.ts --grep '$(grep)'
 
+.PHONY: test-local
+test-local: lib node_modules
+	@TS_NODE_PROJECT='./test/tsconfig.json' MOCK_DIR='./test/data' \
+		MOCK_SOCKET='../../roborovski/testing/tmp/msigs.sock' MOCK=overwrite \
+		${BIN}/mocha ${MOCHA_OPTS} test/*.ts --grep '$(grep)'
+
 .PHONY: test-coverage
 test-coverage: lib node_modules
 	@TS_NODE_PROJECT='./test/tsconfig.json' MOCK_DIR='./test/data' \

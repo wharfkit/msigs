@@ -13,37 +13,42 @@
         "activity": [
             {
                 "action": "proposed",
+                "globalseq": 1033,
                 "proposal_name": "upgrade",
                 "proposer": "alice",
-                "timestamp": "2027-12-12T12:44:01.500"
+                "timestamp": "2025-11-24T01:46:09.500"
             },
             {
                 "action": "proposed",
+                "globalseq": 1029,
                 "proposal_name": "upgrade",
                 "proposer": "alice",
-                "timestamp": "2027-12-12T12:41:31.500"
+                "timestamp": "2025-11-24T01:43:39.500"
             },
             {
                 "action": "proposed",
+                "globalseq": 1025,
                 "proposal_name": "upgrade",
                 "proposer": "alice",
-                "timestamp": "2027-12-12T12:39:51.500"
+                "timestamp": "2025-11-24T01:41:59.500"
             },
             {
                 "action": "executed",
+                "globalseq": 1019,
                 "proposal_name": "upgrade",
                 "proposer": "alice",
-                "timestamp": "2027-12-12T12:39:01.500"
+                "timestamp": "2025-11-24T01:41:09.500"
             },
             {
                 "action": "proposed",
+                "globalseq": 1019,
                 "proposal_name": "upgrade",
                 "proposer": "alice",
-                "timestamp": "2027-12-12T12:36:31.500"
+                "timestamp": "2025-11-24T01:38:39.500"
             }
         ],
         "more": true,
         "total": 11
     },
-    "text": "{\"account\":\"alice\",\"activity\":[{\"action\":\"proposed\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:44:01.500\"},{\"action\":\"proposed\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:41:31.500\"},{\"action\":\"proposed\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:39:51.500\"},{\"action\":\"executed\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:39:01.500\"},{\"action\":\"proposed\",\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2027-12-12T12:36:31.500\"}],\"more\":true,\"total\":11}"
+    "text": "{\"account\":\"alice\",\"activity\":[{\"action\":\"proposed\",\"globalseq\":1033,\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2025-11-24T01:46:09.500\"},{\"action\":\"proposed\",\"globalseq\":1029,\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2025-11-24T01:43:39.500\"},{\"action\":\"proposed\",\"globalseq\":1025,\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2025-11-24T01:41:59.500\"},{\"action\":\"executed\",\"globalseq\":1019,\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2025-11-24T01:41:09.500\"},{\"action\":\"proposed\",\"globalseq\":1019,\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"timestamp\":\"2025-11-24T01:38:39.500\"}],\"more\":true,\"total\":11}"
 }

@@ -36,13 +36,6 @@ console.log('Proposal:', {
     actions_count: proposal.actions_count, // 1
 })
 
-// Get active proposals sorted by expiration
-const active = await msigs.get_active({
-    limit: 10,
-    sort_by: 'expiration',
-})
-console.log(`Found ${active.total} active proposals`)
-
 // Get proposals requiring my approval
 const myProposals = await msigs.get_approver_proposals('bob', {
     status: 'proposed',
@@ -60,7 +53,7 @@ console.log(`Alice has proposed ${activity.total} transactions`)
 
 ## Pagination
 
-All list endpoints (`get_proposals`, `get_active`, `get_activity`, `get_approver_proposals`, `get_proposal_history`) support pagination with standard response fields:
+All list endpoints (`get_proposals`, `get_activity`, `get_approver_proposals`, `get_proposal_history`) support pagination with standard response fields:
 
 -   `total`: Total number of results available
 -   `more`: Boolean indicating if more pages exist
@@ -74,7 +67,7 @@ import {MsigsClient, getPaginationInfo} from '@wharfkit/msigs'
 // Get first page
 let offset = 0
 const limit = 10
-const firstPage = await msigs.get_proposals({limit, offset})
+const firstPage = await msigs.get_proposals('alice', {limit, offset})
 
 console.log(`Total proposals: ${firstPage.total}`)
 console.log(`More pages: ${firstPage.more}`)
@@ -86,7 +79,7 @@ console.log(`Page ${pageInfo.currentPage} of ${pageInfo.totalPages}`)
 
 // Get next page if available
 if (pageInfo.hasMore) {
-    const nextPage = await msigs.get_proposals({
+    const nextPage = await msigs.get_proposals('alice', {
         limit,
         offset: pageInfo.nextOffset,
     })
@@ -96,13 +89,13 @@ if (pageInfo.hasMore) {
 ### Load All Pages Example
 
 ```typescript
-async function getAllProposals(msigs: MsigsClient) {
+async function getAllProposals(msigs: MsigsClient, proposer: string) {
     const allProposals = []
     let offset = 0
     const limit = 20 // Use max limit for efficiency
 
     do {
-        const response = await msigs.get_proposals({limit, offset})
+        const response = await msigs.get_proposals(proposer, {limit, offset})
         allProposals.push(...response.proposals)
 
         if (!response.more) {
@@ -119,7 +112,7 @@ async function getAllProposals(msigs: MsigsClient) {
 
 The service enforces different maximum results per endpoint:
 
--   **Proposals** (get_proposals, get_active, etc.): Default 20 results max
+-   **Proposals** (get_proposals, get_approver_proposals, etc.): Default 20 results max
 -   **Approvals** (get_approvals): Default 100 results max
 
 Check current limits via `get_status()`:
@@ -174,32 +167,21 @@ Get version history for a proposal.
 
 ---
 
-### `get_proposals(options?)`
+### `get_proposals(proposer, options?)`
 
-List proposals with optional filters.
+List proposals for a specific proposer account.
+
+**Parameters:**
+
+-   `proposer: string` - The proposer account to filter by (required)
 
 **Options:**
 
--   `proposer?: string` - Filter by proposer account
 -   `status?: string` - Filter by status: 'proposed', 'executed', 'cancelled', 'expired', 'all'
 -   `limit?: number` - Maximum results to return
 -   `offset?: number` - Pagination offset
 
 **Returns:** Paginated list of proposals matching the filters with `total` and `more` fields.
-
----
-
-### `get_active(options?)`
-
-Get active proposals (proposed, not executed/cancelled/expired).
-
-**Options:**
-
--   `limit?: number` - Maximum results to return
--   `offset?: number` - Pagination offset
--   `sort_by?: string` - Sort field: 'expiration', 'created', 'approvals'
-
-**Returns:** Paginated list of active proposals sorted by the specified field.
 
 ---
 
@@ -244,6 +226,20 @@ Get proposals requiring approval from a specific account.
 -   `options.offset?: number` - Pagination offset
 
 **Returns:** Paginated list of proposals requiring approval from the specified account with `total` and `more` fields.
+
+---
+
+### `debug_proposal(proposer, proposalName, options?)`
+
+Debug proposal status computation (for troubleshooting status discrepancies).
+
+**Parameters:**
+
+-   `proposer: string` - The account that proposed the transaction
+-   `proposalName: string` - The name of the proposal
+-   `options.globalseq?: number` - Debug specific version by global sequence number
+
+**Returns:** Detailed debug information including stored status byte, computed status, expiration checks, approval counts, and debug notes explaining status computation.
 
 ---
 

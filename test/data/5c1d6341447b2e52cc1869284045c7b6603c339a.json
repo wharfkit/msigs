@@ -16,9 +16,9 @@
                 "actions_count": 1,
                 "approvals_received": 2,
                 "approvals_required": 3,
-                "created_at": "2027-12-12T12:19:51.500",
+                "created_at": "2025-11-24T01:21:59.500",
                 "created_trx_id": "ebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebeb",
-                "expiration": "2027-12-27T12:14:01.500",
+                "expiration": "2025-12-24T01:16:09.500",
                 "globalseq": 1003,
                 "my_approval_status": "pending",
                 "my_approval_time": null,
@@ -49,15 +49,15 @@
                     }
                 ],
                 "status": "proposed",
-                "time_remaining_seconds": 2590670
+                "time_remaining_seconds": 5180902
             },
             {
                 "actions_count": 1,
                 "approvals_received": 0,
                 "approvals_required": 4,
-                "created_at": "2027-12-12T12:44:01.500",
+                "created_at": "2025-11-24T01:46:09.500",
                 "created_trx_id": "0909090909090909090909090909090909090909090909090909090909090909",
-                "expiration": "2027-12-27T12:14:01.500",
+                "expiration": "2025-12-24T01:16:09.500",
                 "globalseq": 1033,
                 "my_approval_status": "pending",
                 "my_approval_time": null,
@@ -83,10 +83,10 @@
                     }
                 ],
                 "status": "proposed",
-                "time_remaining_seconds": 2590670
+                "time_remaining_seconds": 5180902
             }
         ],
         "total": 2
     },
-    "text": "{\"approver\":\"charlie\",\"more\":false,\"proposals\":[{\"actions_count\":1,\"approvals_received\":2,\"approvals_required\":3,\"created_at\":\"2027-12-12T12:19:51.500\",\"created_trx_id\":\"ebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebeb\",\"expiration\":\"2027-12-27T12:14:01.500\",\"globalseq\":1003,\"my_approval_status\":\"pending\",\"my_approval_time\":null,\"proposal_name\":\"newperm\",\"proposer\":\"alice\",\"provided_approvals\":[{\"actor\":\"bob\",\"permission\":\"active\"},{\"actor\":\"dave\",\"permission\":\"active\"}],\"requested_approvals\":[{\"actor\":\"bob\",\"permission\":\"active\"},{\"actor\":\"charlie\",\"permission\":\"active\"},{\"actor\":\"dave\",\"permission\":\"active\"}],\"status\":\"proposed\",\"time_remaining_seconds\":2590670},{\"actions_count\":1,\"approvals_received\":0,\"approvals_required\":4,\"created_at\":\"2027-12-12T12:44:01.500\",\"created_trx_id\":\"0909090909090909090909090909090909090909090909090909090909090909\",\"expiration\":\"2027-12-27T12:14:01.500\",\"globalseq\":1033,\"my_approval_status\":\"pending\",\"my_approval_time\":null,\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"provided_approvals\":[],\"requested_approvals\":[{\"actor\":\"bob\",\"permission\":\"active\"},{\"actor\":\"charlie\",\"permission\":\"active\"},{\"actor\":\"dave\",\"permission\":\"active\"},{\"actor\":\"eve\",\"permission\":\"active\"}],\"status\":\"proposed\",\"time_remaining_seconds\":2590670}],\"total\":2}"
+    "text": "{\"approver\":\"charlie\",\"more\":false,\"proposals\":[{\"actions_count\":1,\"approvals_received\":2,\"approvals_required\":3,\"created_at\":\"2025-11-24T01:21:59.500\",\"created_trx_id\":\"ebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebeb\",\"expiration\":\"2025-12-24T01:16:09.500\",\"globalseq\":1003,\"my_approval_status\":\"pending\",\"my_approval_time\":null,\"proposal_name\":\"newperm\",\"proposer\":\"alice\",\"provided_approvals\":[{\"actor\":\"bob\",\"permission\":\"active\"},{\"actor\":\"dave\",\"permission\":\"active\"}],\"requested_approvals\":[{\"actor\":\"bob\",\"permission\":\"active\"},{\"actor\":\"charlie\",\"permission\":\"active\"},{\"actor\":\"dave\",\"permission\":\"active\"}],\"status\":\"proposed\",\"time_remaining_seconds\":5180902},{\"actions_count\":1,\"approvals_received\":0,\"approvals_required\":4,\"created_at\":\"2025-11-24T01:46:09.500\",\"created_trx_id\":\"0909090909090909090909090909090909090909090909090909090909090909\",\"expiration\":\"2025-12-24T01:16:09.500\",\"globalseq\":1033,\"my_approval_status\":\"pending\",\"my_approval_time\":null,\"proposal_name\":\"upgrade\",\"proposer\":\"alice\",\"provided_approvals\":[],\"requested_approvals\":[{\"actor\":\"bob\",\"permission\":\"active\"},{\"actor\":\"charlie\",\"permission\":\"active\"},{\"actor\":\"dave\",\"permission\":\"active\"},{\"actor\":\"eve\",\"permission\":\"active\"}],\"status\":\"proposed\",\"time_remaining_seconds\":5180902}],\"total\":2}"
 }

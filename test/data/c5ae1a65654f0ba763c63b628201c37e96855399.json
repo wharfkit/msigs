@@ -3,7 +3,7 @@
         "path": "http://localhost/v1/proposals/get_proposals",
         "params": {
             "method": "POST",
-            "body": "{\"proposer\":\"alice\",\"limit\":10}",
+            "body": "{\"proposer\":\"alice\"}",
             "headers": {}
         }
     },

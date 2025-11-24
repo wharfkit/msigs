@@ -31,8 +31,13 @@ export interface Proposal {
     globalseq: number
     expiration: string | TimePoint
     actions_count: number
-    requested_approvals: PermissionLevel[]
-    provided_approvals: PermissionLevel[]
+    requested_approvals?: PermissionLevel[]
+    provided_approvals?: PermissionLevel[]
+    // Summary fields (present in list endpoints, absent in detail endpoint)
+    approvals_required?: number
+    approvals_received?: number
+    approval_ratio?: number
+    time_remaining_seconds?: number
     transaction?: Transaction
     executed_at?: string | TimePoint | null
     executed_by?: Name | string | null
@@ -65,6 +70,7 @@ export interface ActivityEvent {
     timestamp: string | TimePoint
     proposer: Name | string
     proposal_name: Name | string
+    globalseq: number
 }
 
 export interface ServiceStatus {
@@ -94,12 +100,6 @@ export interface GetProposalHistoryResponse {
 
 export interface GetProposalsResponse {
     proposals: Proposal[]
-    more: boolean
-    total: number
-}
-
-export interface GetActiveResponse {
-    proposals: Proposal[] | null
     more: boolean
     total: number
 }
@@ -136,3 +136,26 @@ export interface SearchProposalsResponse {
 }
 
 export type GetStatusResponse = ServiceStatus
+
+export interface DebugProposalResponse {
+    proposer: Name | string
+    proposal_name: Name | string
+    globalseq: number
+    actions_count: number
+    stored_status_byte: number
+    stored_status_string: ProposalStatus
+    computed_status_byte: number
+    computed_status_string: ProposalStatus
+    status_changed: boolean
+    stored_proposed_at: number
+    stored_executed_at: number
+    stored_cancelled_at: number
+    stored_expiration_unix: number
+    stored_expiration_iso: string | TimePoint
+    current_time_unix: number
+    current_time_iso: string | TimePoint
+    is_expiration_past: boolean
+    time_until_expiration: number
+    approvals_requested: number
+    approvals_provided: number
+}

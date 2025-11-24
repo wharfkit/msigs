@@ -1,6 +1,6 @@
 import {APIClient, Int32, Name, NameType, UInt64, UInt64Type} from '@wharfkit/antelope'
 import type {
-    GetActiveResponse,
+    DebugProposalResponse,
     GetActivityResponse,
     GetApprovalsResponse,
     GetApproverProposalsResponse,
@@ -23,16 +23,13 @@ interface GetProposalHistoryOptions {
 }
 
 interface GetProposalsOptions {
-    proposer?: NameType
     status?: string
     limit?: number
     offset?: number
 }
 
-interface GetActiveOptions {
-    limit?: number
-    offset?: number
-    sort_by?: string
+interface DebugProposalOptions {
+    globalseq?: UInt64Type
 }
 
 interface GetApprovalsOptions {
@@ -167,11 +164,9 @@ export class MsigsClient {
         }) as Promise<GetProposalHistoryResponse>
     }
 
-    async get_proposals(options?: GetProposalsOptions) {
-        const params: Record<string, any> = {}
-
-        if (options && options.proposer !== undefined) {
-            params['proposer'] = Name.from(options.proposer)
+    async get_proposals(proposer: NameType, options?: GetProposalsOptions) {
+        const params: Record<string, any> = {
+            proposer: Name.from(proposer),
         }
 
         if (options && options.status !== undefined) {
@@ -194,31 +189,6 @@ export class MsigsClient {
             path: '/v1/proposals/get_proposals',
             params,
         }) as Promise<GetProposalsResponse>
-    }
-
-    async get_active(options?: GetActiveOptions) {
-        const params: Record<string, any> = {}
-
-        if (options && options.limit !== undefined) {
-            await this.initializeLimits()
-            if (options.limit > this.maxProposalLimit!) {
-                throw new Error(`Limit cannot exceed ${this.maxProposalLimit}`)
-            }
-            params['limit'] = Int32.from(options.limit)
-        }
-
-        if (options && options.offset !== undefined) {
-            params['offset'] = Int32.from(options.offset)
-        }
-
-        if (options && options.sort_by !== undefined) {
-            params['sort_by'] = options.sort_by
-        }
-
-        return this.client.call({
-            path: '/v1/proposals/get_active',
-            params,
-        }) as Promise<GetActiveResponse>
     }
 
     async get_approvals(proposer: NameType, proposalName: NameType, options?: GetApprovalsOptions) {
@@ -339,6 +309,26 @@ export class MsigsClient {
             path: '/v1/proposals/get_status',
             params: {},
         }) as Promise<GetStatusResponse>
+    }
+
+    async debug_proposal(
+        proposer: NameType,
+        proposalName: NameType,
+        options?: DebugProposalOptions
+    ) {
+        const params: Record<string, any> = {
+            proposer: Name.from(proposer),
+            proposal_name: Name.from(proposalName),
+        }
+
+        if (options && options.globalseq !== undefined) {
+            params['globalseq'] = UInt64.from(options.globalseq)
+        }
+
+        return this.client.call({
+            path: '/v1/proposals/debug_proposal',
+            params,
+        }) as Promise<DebugProposalResponse>
     }
 }
 

@@ -1,7 +1,7 @@
 {
     "name": "@wharfkit/msigs",
     "description": "API Client to access Roborovski msigs API endpoints",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "homepage": "https://github.com/wharfkit/msigs",
     "main": "lib/msigs.js",
     "module": "lib/msigs.m.js",

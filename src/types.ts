@@ -61,8 +61,8 @@ export interface ApprovalEvent {
     actor: Name | string
     permission: Name | string
     timestamp: string | TimePoint
-    block_num: number
     globalseq: number
+    trx_id: Checksum256 | string
 }
 
 export interface ActivityEvent {
@@ -71,6 +71,7 @@ export interface ActivityEvent {
     proposer: Name | string
     proposal_name: Name | string
     globalseq: number
+    trx_id: Checksum256 | string
 }
 
 export interface ServiceStatus {
